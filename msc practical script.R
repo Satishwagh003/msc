@@ -176,6 +176,7 @@ x
 hence we required 2 pc to explain 90% varaiton
 
 ## scor plot of first two pc
+evec <- E$vectors
 D=as.matrix(D);D
 scor <- D %*% evec
 scor
