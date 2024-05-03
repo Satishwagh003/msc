@@ -13,7 +13,7 @@ anova(m)
 #test significance parameter
 confint(m)
 #construct c.i for regression parameter
-if p value less than 0.05 or level of significxance the parameter is singnificanct.
+#if p value less than 0.05 or level of significxance the parameter is singnificanct.
 answer is the model is signifivcant
 #construct c.i estimated value y
 new= data.frame(x3=85)
@@ -36,7 +36,7 @@ confint(m)
 new=data.frame(x1=20,x2=25,x3=40)
 predict(m,newdata=new,interval='confidence')
 
-**********2)variables selection and model building *****************
+# **********2)variables selection and model building *****************
 df = read.csv("C:\\Users\\hp\\Desktop\\PGPDS\\Resume\\data for MLR.csv")
 df
 y=df$FINAL
@@ -173,7 +173,7 @@ x[i]=i
 }
 }
 x
-hence we required 2 pc to explain 90% varaiton
+#hence we required 2 pc to explain 90% varaiton
 
 ## scor plot of first two pc
 evec <- E$vectors
@@ -182,6 +182,8 @@ scor <- D %*% evec
 scor
 plot(scor[,1],scor[,2],xlab="1stpc",ylab="2nd pc",col=rep(c(3,4),each=100),pch=rep(c(15,16),each=100))
 
+# Now you can use scores for further analysis or visualization
+print(scores)
 ## important variables based on first two pc
 which(evec[,1]==max(evec[,1]))
 which(evec[,2]==max(evec[,2]))
@@ -198,10 +200,11 @@ evec=E$vectors;evec
 cov=matrix(c(1,4,4,100),byrow=TRUE,ncol=2)
 cov
 E=eigen(cov);E
+x
 eval=E$values;eval
 evec=E$vectors;evec
-PC1=evec['1];PC1
-pC2=evec[,2];PC2
+PC1=evec[,1];PC1
+pC2=evec[,2];pC2
 plot(eval,type="o",pch=13,main="scree plot")
 scor=cov%*%evec
 plot(scor[,1],scor[,2],xlab="1stpc",ylab="2nd pc",main="scor plot")
@@ -229,9 +232,9 @@ k=2
 p=ncol(C) 
 Q=matrix(ncol=p,nrow = p) 
 for(i in 1:p) 
-+ { 
-+ Q[,i]=sqrt(eval[i])*evec[,i] 
-+ } 
+{ 
+Q[,i]=sqrt(eval[i])*evec[,i] 
+} 
 Q
 Q1=Q[,1:k];Q1
 cm=rowSums(Q1^2);cm ##Communalities
@@ -248,11 +251,11 @@ evec=eigen(corr)$vectors;evec
 p=ncol(D) 
 Q=matrix(nrow=p,ncol=p) 
 for(i in 1:p) 
-+ { 
-+ Q[,i]=sqrt(eval[i])*evec[,i] 
-+ } 
+{ 
+ Q[,i]=sqrt(eval[i])*evec[,i] 
+ } 
  Q ## Loading matrix
- plot(eval,type="o",pch="o",main="Scree plot")
+plot(eval,type="o",pch="o",main="Scree plot")
 #In this scree plot elbow is at 3rd so that first two factors are most important. 
 k=2 
 Q1=Q[,1:k];Q1 ##loading matrix of specific factors
@@ -261,7 +264,7 @@ psi=corr-Q1%*%t(Q1);psi #variance matrix of specific factors
 ps=diag(diag(psi));ps #Estimated variance matrix of specific factors
 q11=-1*Q1[,1] 
 Q2=cbind(q11,Q1[,2]) 
-
+Q2
 
 
 
@@ -315,14 +318,14 @@ mu3=matrix(c(rep(0,15)),nrow=15,ncol=1,byrow=T)
 r1=cbind(r,mu3) 
 dim(r1) 
 x=t(a)+r1 
-
+x
 *****10) other examples*****
 y11=c(8.04,6.95,7.58,8.81,8.33,9.96,7.24,4.26,10.84,4.82,5.68) 
 y12=c(9.14,8.14,8.74,8.77,9.26,8.10,6.13,3.10,9.13,7.26,4.74) 
 y13=c(7.46,6.77,12.74,7.11,7.81,8.84,6.08,5.39,8.15,6.42,5.73) 
 x=c(10,8,13,9,11,14,6,4,12,7,7) 
-x'=c(8,8,8,8,8,8,8,19,8,8,8) 
-y'=c(6.58,5.76,7.71,8.84,8.47,7.04,5.25,12.50,5.56,7.91,6.89) 
+x_=c(8,8,8,8,8,8,8,19,8,8,8) 
+y_=c(6.58,5.76,7.71,8.84,8.47,7.04,5.25,12.50,5.56,7.91,6.89) 
 
 ##Regression line of y11 on x 
 
@@ -357,6 +360,8 @@ library(pracma)
 A=as.matrix(data[,2:3]) 
 A 
 f=y 
+install.packages("andrewsplot")
+library(andrewsplot)
 andrewsplot(A, f, style = "pol", scaled = FALSE, npts = 10)
 hist(I)
  
