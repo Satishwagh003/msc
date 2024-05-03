@@ -217,6 +217,53 @@ prop=eval/sum(eval)
 prop
 
 ******7)factor analysis**************
+
+###Perform factor analysis and interpret the results.
+C=matrix(c(1,0.02,0.96,0.42,0.01,0.02,1,0.13,0.71,0.85,0.96,0.13,1,0.5,0.11,0.42,0.71,0.5,1,
+0.79,0.01,0.85,0.11,0.79,1),nrow=5,ncol=5,byrow=T) 
+eval=eigen(C)$values;eval 
+evec=eigen(C)$vectors;evec
+plot(eval,type="o",pch=16,main="Scree plot") 
+k=2 
+p=ncol(C) 
+Q=matrix(ncol=p,nrow = p) 
+for(i in 1:p) 
++ { 
++ Q[,i]=sqrt(eval[i])*evec[,i] 
++ } 
+Q
+Q1=Q[,1:k];Q1
+cm=rowSums(Q1^2);cm ##Communalities
+psi=C-Q1%*%t(Q1);psi
+ps=diag(diag(psi));ps ##Estimated variance matrix of specific factors
+plot(Q1,xlim=c(0,0.9),main = "loading plot") 
+
+##2)a. Principal component method   b. Maximum likelihood method.
+D=matrix(c(1,0.577,0.509,0.387,0.462,0.577,1,0.599,0.389,0.322,0.509,0.599,1,0.436,0.426
+,0.387,0.389,0.436,1,0.523,0.462,0.322,0.426,0.523,1),nrow=5,ncol=5,byrow=TRUE) 
+corr=cor(D);corr
+eval=eigen(corr)$values;eval
+evec=eigen(corr)$vectors;evec
+p=ncol(D) 
+Q=matrix(nrow=p,ncol=p) 
+for(i in 1:p) 
++ { 
++ Q[,i]=sqrt(eval[i])*evec[,i] 
++ } 
+ Q ## Loading matrix
+ plot(eval,type="o",pch="o",main="Scree plot")
+#In this scree plot elbow is at 3rd so that first two factors are most important. 
+k=2 
+Q1=Q[,1:k];Q1 ##loading matrix of specific factors
+C=rowSums(Q1^2);C ##Communalities 
+psi=corr-Q1%*%t(Q1);psi #variance matrix of specific factors 
+ps=diag(diag(psi));ps #Estimated variance matrix of specific factors
+q11=-1*Q1[,1] 
+Q2=cbind(q11,Q1[,2]) 
+
+
+
+
 ******8)canonical correlation*****
 ##find sample canonical correlation
 m=matrix(c(1,0.6328,0.2412,.....),nrow=4,byrow=TRUE)
