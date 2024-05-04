@@ -275,6 +275,7 @@ m
 sxx=m[1:2,1:2]
 syy=m[3:4,3:4]
 sxy=m[1:2,3:4]
+syx=t(sxy)
 eval=eigen(sxx)$values
 lam=diag(sqrt(eval))
 gamma=eigen(sxx)$vectors
