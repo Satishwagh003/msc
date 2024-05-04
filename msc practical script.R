@@ -122,8 +122,9 @@ library(car)
 
 df=read.csv("C:\\Users\\hp\\Desktop\\PGPDS\\Resume\\data mtcars.csv")
 df
-install.packages("car")
-library(car)
+vif(m)
+install.packages("carData")
+library(carData)
 install.packages("glmnet")
 library(glmnet)
 y=mtcars$hp
